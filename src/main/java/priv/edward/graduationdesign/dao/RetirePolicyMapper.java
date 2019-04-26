@@ -1,10 +1,14 @@
 package priv.edward.graduationdesign.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import priv.edward.graduationdesign.model.RetirePolicy;
 import priv.edward.graduationdesign.model.RetirePolicyExample;
 
+@Repository
 public interface RetirePolicyMapper {
     long countByExample(RetirePolicyExample example);
 

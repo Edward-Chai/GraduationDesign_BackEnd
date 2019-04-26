@@ -1,10 +1,14 @@
 package priv.edward.graduationdesign.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import priv.edward.graduationdesign.model.Staff;
 import priv.edward.graduationdesign.model.StaffExample;
 
+@Repository
 public interface StaffMapper {
     long countByExample(StaffExample example);
 
