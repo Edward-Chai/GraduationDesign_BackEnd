@@ -9,81 +9,9 @@
       <arg column="peEndDate" javaType="java.util.Date" jdbcType="DATE" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List">
     peId, peCata, peStartDate, peEndDate
   </sql>
-  <select id="selectByExample" parameterType="priv.edward.graduationdesign.model.PensionEventExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from pensionevent
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -93,12 +21,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from pensionevent
     where peId = #{peid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="priv.edward.graduationdesign.model.PensionEventExample">
-    delete from pensionevent
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="priv.edward.graduationdesign.model.PensionEvent">
     insert into pensionevent (peId, peCata, peStartDate, 
@@ -137,42 +59,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="priv.edward.graduationdesign.model.PensionEventExample" resultType="java.lang.Long">
-    select count(*) from pensionevent
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update pensionevent
-    <set>
-      <if test="record.peid != null">
-        peId = #{record.peid,jdbcType=INTEGER},
-      </if>
-      <if test="record.pecata != null">
-        peCata = #{record.pecata,jdbcType=CHAR},
-      </if>
-      <if test="record.pestartdate != null">
-        peStartDate = #{record.pestartdate,jdbcType=DATE},
-      </if>
-      <if test="record.peenddate != null">
-        peEndDate = #{record.peenddate,jdbcType=DATE},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update pensionevent
-    set peId = #{record.peid,jdbcType=INTEGER},
-      peCata = #{record.pecata,jdbcType=CHAR},
-      peStartDate = #{record.pestartdate,jdbcType=DATE},
-      peEndDate = #{record.peenddate,jdbcType=DATE}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="priv.edward.graduationdesign.model.PensionEvent">
     update pensionevent
     <set>

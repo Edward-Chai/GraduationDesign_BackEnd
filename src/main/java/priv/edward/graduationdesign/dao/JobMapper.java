@@ -1,33 +1,23 @@
 package priv.edward.graduationdesign.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import priv.edward.graduationdesign.model.Job;
-import priv.edward.graduationdesign.model.JobExample;
 
-@Mapper
+import java.util.List;
+
 @Repository
+@Mapper
 public interface JobMapper {
-    long countByExample(JobExample example);
-
-    int deleteByExample(JobExample example);
-
     int deleteByPrimaryKey(Integer jobid);
 
     int insert(Job record);
 
     int insertSelective(Job record);
 
-    List<Job> selectByExample(JobExample example);
-
     Job selectByPrimaryKey(Integer jobid);
 
-    int updateByExampleSelective(@Param("record") Job record, @Param("example") JobExample example);
-
-    int updateByExample(@Param("record") Job record, @Param("example") JobExample example);
+    List<Job> selectAll();
 
     int updateByPrimaryKeySelective(Job record);
 

@@ -8,6 +8,8 @@ import priv.edward.graduationdesign.model.Job;
 import priv.edward.graduationdesign.service.JobService;
 import priv.edward.graduationdesign.util.Message;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class JobServiceImpl implements JobService {
@@ -17,7 +19,8 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Message addJob(Job job) {
-        int count = jobMapper.insert(job);
+//        System.out.println("job:"+job.getJobname()+"----"+job.getSpecificity()+"---end");
+        int count = jobMapper.insertSelective(job);
         if (count >0){
             return Message.success();
         }else {
@@ -26,12 +29,42 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public boolean removeJob() {
-        return false;
+    public Message queryAllJobs() {
+        List<Job> jobList = jobMapper.selectAll();
+        if (jobList.size()>0){
+            return Message.success().add("jobList",jobList);
+        }else {
+            return Message.fail();
+        }
     }
 
     @Override
-    public boolean editJob() {
-        return false;
+    public Message queryJob(int key) {
+        Job job = jobMapper.selectByPrimaryKey(key);
+        if (job.getJobid()!=0){
+            return Message.success().add("job",job);
+        }else {
+            return Message.fail();
+        }
+    }
+
+    @Override
+    public Message removeJob(int key) {
+        int count = jobMapper.deleteByPrimaryKey(key);
+        if (count > 0){
+            return Message.success();
+        }else {
+            return Message.fail();
+        }
+    }
+
+    @Override
+    public Message editJob(Job job) {
+        int count = jobMapper.updateByPrimaryKey(job);
+        if (count > 0){
+            return Message.success();
+        }else {
+            return Message.fail();
+        }
     }
 }

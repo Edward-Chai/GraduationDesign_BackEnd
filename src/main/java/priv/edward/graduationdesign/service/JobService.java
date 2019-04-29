@@ -9,7 +9,11 @@ public interface JobService {
 
     Message addJob(Job job);
 
-    boolean removeJob();
+    Message queryAllJobs();
 
-    boolean editJob();
+    Message queryJob(int key);
+
+    Message removeJob(int key);
+
+    Message editJob(Job job);
 }
