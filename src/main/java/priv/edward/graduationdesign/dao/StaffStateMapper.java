@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import priv.edward.graduationdesign.model.StaffState;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface StaffStateMapper {
@@ -14,6 +16,8 @@ public interface StaffStateMapper {
     int insertSelective(StaffState record);
 
     StaffState selectByPrimaryKey(Integer ssid);
+
+    List<StaffState> selectAll();
 
     int updateByPrimaryKeySelective(StaffState record);
 

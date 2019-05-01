@@ -16,6 +16,9 @@
     from staffstate
     where ssId = #{ssid,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from staffstate
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staffstate
     where ssId = #{ssid,jdbcType=INTEGER}

@@ -25,6 +25,9 @@
     from retirepolicy
     where rpId = #{rpid,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from retirepolicy
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from retirepolicy
     where rpId = #{rpid,jdbcType=INTEGER}
