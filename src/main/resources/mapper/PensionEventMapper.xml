@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.edward.graduationdesign.dao.PensionEventMapper">
+  <resultMap id="BaseResultMap" type="priv.edward.graduationdesign.model.PensionEvent">
+    <constructor>
+      <idArg column="peId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="peCata" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="peStartDate" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="peEndDate" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="staffId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    peId, peCata, peStartDate, peEndDate, staffId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from pensionevent
+  where peId = #{peid,jdbcType=INTEGER}
+</select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from pensionevent
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pensionevent
+    where peId = #{peid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="priv.edward.graduationdesign.model.PensionEvent">
+    insert into pensionevent (peId, peCata, peStartDate, 
+      peEndDate, staffId)
+    values (#{peid,jdbcType=INTEGER}, #{pecata,jdbcType=CHAR}, #{pestartdate,jdbcType=DATE}, 
+      #{peenddate,jdbcType=DATE}, #{staffid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="priv.edward.graduationdesign.model.PensionEvent">
+    insert into pensionevent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="peid != null">
+        peId,
+      </if>
+      <if test="pecata != null">
+        peCata,
+      </if>
+      <if test="pestartdate != null">
+        peStartDate,
+      </if>
+      <if test="peenddate != null">
+        peEndDate,
+      </if>
+      <if test="staffid != null">
+        staffId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="peid != null">
+        #{peid,jdbcType=INTEGER},
+      </if>
+      <if test="pecata != null">
+        #{pecata,jdbcType=CHAR},
+      </if>
+      <if test="pestartdate != null">
+        #{pestartdate,jdbcType=DATE},
+      </if>
+      <if test="peenddate != null">
+        #{peenddate,jdbcType=DATE},
+      </if>
+      <if test="staffid != null">
+        #{staffid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="priv.edward.graduationdesign.model.PensionEvent">
+    update pensionevent
+    <set>
+      <if test="pecata != null">
+        peCata = #{pecata,jdbcType=CHAR},
+      </if>
+      <if test="pestartdate != null">
+        peStartDate = #{pestartdate,jdbcType=DATE},
+      </if>
+      <if test="peenddate != null">
+        peEndDate = #{peenddate,jdbcType=DATE},
+      </if>
+      <if test="staffid != null">
+        staffId = #{staffid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where peId = #{peid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="priv.edward.graduationdesign.model.PensionEvent">
+    update pensionevent
+    set peCata = #{pecata,jdbcType=CHAR},
+      peStartDate = #{pestartdate,jdbcType=DATE},
+      peEndDate = #{peenddate,jdbcType=DATE},
+      staffId = #{staffid,jdbcType=INTEGER}
+    where peId = #{peid,jdbcType=INTEGER}
+  </update>
+</mapper>
