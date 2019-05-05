@@ -2,6 +2,7 @@ package priv.edward.graduationdesign.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import priv.edward.graduationdesign.dao.RetirePolicyMapper;
 import priv.edward.graduationdesign.model.RetirePolicy;
 import priv.edward.graduationdesign.service.RetirePolicyService;
@@ -10,6 +11,7 @@ import priv.edward.graduationdesign.util.Message;
 import java.util.List;
 
 @Service
+@Transactional
 public class RetirePolicyServiceImpl implements RetirePolicyService {
 
     @Autowired

@@ -4,20 +4,34 @@
   <resultMap id="BaseResultMap" type="priv.edward.graduationdesign.model.RetirePolicy">
     <constructor>
       <idArg column="rpId" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="rpRegion" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="rpName" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="normalAgeM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="normalAgeMc" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="normalAgeF" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="normalAgeFc" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="specialJobAgeM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="specialJobAgeMc" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="specialJobAgeF" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="specialJobAgeFc" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="bankruptcyAgeM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="bankruptcyAgeMc" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="bankruptcyAgeF" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="bankruptcyAgeFc" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="illnessAgeM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="illnessAgeMc" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="illnessAgeF" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="illnessAgeFc" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="industrialAccidentAgeM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="industrialAccidentAgeMc" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="industrialAccidentAgeF" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="industrialAccidentAgeFc" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    rpId, rpRegion, normalAgeM, normalAgeF, specialJobAgeM, specialJobAgeF, bankruptcyAgeM, 
-    bankruptcyAgeF, illnessAgeM, illnessAgeF
+    rpId, rpName, normalAgeM, normalAgeMc, normalAgeF, normalAgeFc, specialJobAgeM, specialJobAgeMc, 
+    specialJobAgeF, specialJobAgeFc, bankruptcyAgeM, bankruptcyAgeMc, bankruptcyAgeF, 
+    bankruptcyAgeFc, illnessAgeM, illnessAgeMc, illnessAgeF, illnessAgeFc, industrialAccidentAgeM, 
+    industrialAccidentAgeMc, industrialAccidentAgeF, industrialAccidentAgeFc
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,14 +47,24 @@
     where rpId = #{rpid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="priv.edward.graduationdesign.model.RetirePolicy">
-    insert into retirepolicy (rpId, rpRegion, normalAgeM, 
-      normalAgeF, specialJobAgeM, specialJobAgeF, 
-      bankruptcyAgeM, bankruptcyAgeF, illnessAgeM, 
-      illnessAgeF)
-    values (#{rpid,jdbcType=INTEGER}, #{rpregion,jdbcType=VARCHAR}, #{normalagem,jdbcType=INTEGER}, 
-      #{normalagef,jdbcType=INTEGER}, #{specialjobagem,jdbcType=INTEGER}, #{specialjobagef,jdbcType=INTEGER}, 
-      #{bankruptcyagem,jdbcType=INTEGER}, #{bankruptcyagef,jdbcType=INTEGER}, #{illnessagem,jdbcType=INTEGER}, 
-      #{illnessagef,jdbcType=INTEGER})
+    insert into retirepolicy (rpId, rpName, normalAgeM, 
+      normalAgeMc, normalAgeF, normalAgeFc, 
+      specialJobAgeM, specialJobAgeMc, specialJobAgeF, 
+      specialJobAgeFc, bankruptcyAgeM, bankruptcyAgeMc, 
+      bankruptcyAgeF, bankruptcyAgeFc, illnessAgeM, 
+      illnessAgeMc, illnessAgeF, illnessAgeFc, 
+      industrialAccidentAgeM, industrialAccidentAgeMc, 
+      industrialAccidentAgeF, industrialAccidentAgeFc
+      )
+    values (#{rpid,jdbcType=INTEGER}, #{rpname,jdbcType=VARCHAR}, #{normalagem,jdbcType=INTEGER}, 
+      #{normalagemc,jdbcType=INTEGER}, #{normalagef,jdbcType=INTEGER}, #{normalagefc,jdbcType=INTEGER}, 
+      #{specialjobagem,jdbcType=INTEGER}, #{specialjobagemc,jdbcType=INTEGER}, #{specialjobagef,jdbcType=INTEGER}, 
+      #{specialjobagefc,jdbcType=INTEGER}, #{bankruptcyagem,jdbcType=INTEGER}, #{bankruptcyagemc,jdbcType=INTEGER}, 
+      #{bankruptcyagef,jdbcType=INTEGER}, #{bankruptcyagefc,jdbcType=INTEGER}, #{illnessagem,jdbcType=INTEGER}, 
+      #{illnessagemc,jdbcType=INTEGER}, #{illnessagef,jdbcType=INTEGER}, #{illnessagefc,jdbcType=INTEGER}, 
+      #{industrialaccidentagem,jdbcType=INTEGER}, #{industrialaccidentagemc,jdbcType=INTEGER}, 
+      #{industrialaccidentagef,jdbcType=INTEGER}, #{industrialaccidentagefc,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="priv.edward.graduationdesign.model.RetirePolicy">
     insert into retirepolicy
@@ -48,111 +72,231 @@
       <if test="rpid != null">
         rpId,
       </if>
-      <if test="rpregion != null">
-        rpRegion,
+      <if test="rpname != null">
+        rpName,
       </if>
       <if test="normalagem != null">
         normalAgeM,
       </if>
+      <if test="normalagemc != null">
+        normalAgeMc,
+      </if>
       <if test="normalagef != null">
         normalAgeF,
+      </if>
+      <if test="normalagefc != null">
+        normalAgeFc,
       </if>
       <if test="specialjobagem != null">
         specialJobAgeM,
       </if>
+      <if test="specialjobagemc != null">
+        specialJobAgeMc,
+      </if>
       <if test="specialjobagef != null">
         specialJobAgeF,
+      </if>
+      <if test="specialjobagefc != null">
+        specialJobAgeFc,
       </if>
       <if test="bankruptcyagem != null">
         bankruptcyAgeM,
       </if>
+      <if test="bankruptcyagemc != null">
+        bankruptcyAgeMc,
+      </if>
       <if test="bankruptcyagef != null">
         bankruptcyAgeF,
+      </if>
+      <if test="bankruptcyagefc != null">
+        bankruptcyAgeFc,
       </if>
       <if test="illnessagem != null">
         illnessAgeM,
       </if>
+      <if test="illnessagemc != null">
+        illnessAgeMc,
+      </if>
       <if test="illnessagef != null">
         illnessAgeF,
+      </if>
+      <if test="illnessagefc != null">
+        illnessAgeFc,
+      </if>
+      <if test="industrialaccidentagem != null">
+        industrialAccidentAgeM,
+      </if>
+      <if test="industrialaccidentagemc != null">
+        industrialAccidentAgeMc,
+      </if>
+      <if test="industrialaccidentagef != null">
+        industrialAccidentAgeF,
+      </if>
+      <if test="industrialaccidentagefc != null">
+        industrialAccidentAgeFc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rpid != null">
         #{rpid,jdbcType=INTEGER},
       </if>
-      <if test="rpregion != null">
-        #{rpregion,jdbcType=VARCHAR},
+      <if test="rpname != null">
+        #{rpname,jdbcType=VARCHAR},
       </if>
       <if test="normalagem != null">
         #{normalagem,jdbcType=INTEGER},
       </if>
+      <if test="normalagemc != null">
+        #{normalagemc,jdbcType=INTEGER},
+      </if>
       <if test="normalagef != null">
         #{normalagef,jdbcType=INTEGER},
+      </if>
+      <if test="normalagefc != null">
+        #{normalagefc,jdbcType=INTEGER},
       </if>
       <if test="specialjobagem != null">
         #{specialjobagem,jdbcType=INTEGER},
       </if>
+      <if test="specialjobagemc != null">
+        #{specialjobagemc,jdbcType=INTEGER},
+      </if>
       <if test="specialjobagef != null">
         #{specialjobagef,jdbcType=INTEGER},
+      </if>
+      <if test="specialjobagefc != null">
+        #{specialjobagefc,jdbcType=INTEGER},
       </if>
       <if test="bankruptcyagem != null">
         #{bankruptcyagem,jdbcType=INTEGER},
       </if>
+      <if test="bankruptcyagemc != null">
+        #{bankruptcyagemc,jdbcType=INTEGER},
+      </if>
       <if test="bankruptcyagef != null">
         #{bankruptcyagef,jdbcType=INTEGER},
+      </if>
+      <if test="bankruptcyagefc != null">
+        #{bankruptcyagefc,jdbcType=INTEGER},
       </if>
       <if test="illnessagem != null">
         #{illnessagem,jdbcType=INTEGER},
       </if>
+      <if test="illnessagemc != null">
+        #{illnessagemc,jdbcType=INTEGER},
+      </if>
       <if test="illnessagef != null">
         #{illnessagef,jdbcType=INTEGER},
+      </if>
+      <if test="illnessagefc != null">
+        #{illnessagefc,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagem != null">
+        #{industrialaccidentagem,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagemc != null">
+        #{industrialaccidentagemc,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagef != null">
+        #{industrialaccidentagef,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagefc != null">
+        #{industrialaccidentagefc,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="priv.edward.graduationdesign.model.RetirePolicy">
     update retirepolicy
     <set>
-      <if test="rpregion != null">
-        rpRegion = #{rpregion,jdbcType=VARCHAR},
+      <if test="rpname != null">
+        rpName = #{rpname,jdbcType=VARCHAR},
       </if>
       <if test="normalagem != null">
         normalAgeM = #{normalagem,jdbcType=INTEGER},
       </if>
+      <if test="normalagemc != null">
+        normalAgeMc = #{normalagemc,jdbcType=INTEGER},
+      </if>
       <if test="normalagef != null">
         normalAgeF = #{normalagef,jdbcType=INTEGER},
+      </if>
+      <if test="normalagefc != null">
+        normalAgeFc = #{normalagefc,jdbcType=INTEGER},
       </if>
       <if test="specialjobagem != null">
         specialJobAgeM = #{specialjobagem,jdbcType=INTEGER},
       </if>
+      <if test="specialjobagemc != null">
+        specialJobAgeMc = #{specialjobagemc,jdbcType=INTEGER},
+      </if>
       <if test="specialjobagef != null">
         specialJobAgeF = #{specialjobagef,jdbcType=INTEGER},
+      </if>
+      <if test="specialjobagefc != null">
+        specialJobAgeFc = #{specialjobagefc,jdbcType=INTEGER},
       </if>
       <if test="bankruptcyagem != null">
         bankruptcyAgeM = #{bankruptcyagem,jdbcType=INTEGER},
       </if>
+      <if test="bankruptcyagemc != null">
+        bankruptcyAgeMc = #{bankruptcyagemc,jdbcType=INTEGER},
+      </if>
       <if test="bankruptcyagef != null">
         bankruptcyAgeF = #{bankruptcyagef,jdbcType=INTEGER},
+      </if>
+      <if test="bankruptcyagefc != null">
+        bankruptcyAgeFc = #{bankruptcyagefc,jdbcType=INTEGER},
       </if>
       <if test="illnessagem != null">
         illnessAgeM = #{illnessagem,jdbcType=INTEGER},
       </if>
+      <if test="illnessagemc != null">
+        illnessAgeMc = #{illnessagemc,jdbcType=INTEGER},
+      </if>
       <if test="illnessagef != null">
         illnessAgeF = #{illnessagef,jdbcType=INTEGER},
+      </if>
+      <if test="illnessagefc != null">
+        illnessAgeFc = #{illnessagefc,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagem != null">
+        industrialAccidentAgeM = #{industrialaccidentagem,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagemc != null">
+        industrialAccidentAgeMc = #{industrialaccidentagemc,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagef != null">
+        industrialAccidentAgeF = #{industrialaccidentagef,jdbcType=INTEGER},
+      </if>
+      <if test="industrialaccidentagefc != null">
+        industrialAccidentAgeFc = #{industrialaccidentagefc,jdbcType=INTEGER},
       </if>
     </set>
     where rpId = #{rpid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="priv.edward.graduationdesign.model.RetirePolicy">
     update retirepolicy
-    set rpRegion = #{rpregion,jdbcType=VARCHAR},
+    set rpName = #{rpname,jdbcType=VARCHAR},
       normalAgeM = #{normalagem,jdbcType=INTEGER},
+      normalAgeMc = #{normalagemc,jdbcType=INTEGER},
       normalAgeF = #{normalagef,jdbcType=INTEGER},
+      normalAgeFc = #{normalagefc,jdbcType=INTEGER},
       specialJobAgeM = #{specialjobagem,jdbcType=INTEGER},
+      specialJobAgeMc = #{specialjobagemc,jdbcType=INTEGER},
       specialJobAgeF = #{specialjobagef,jdbcType=INTEGER},
+      specialJobAgeFc = #{specialjobagefc,jdbcType=INTEGER},
       bankruptcyAgeM = #{bankruptcyagem,jdbcType=INTEGER},
+      bankruptcyAgeMc = #{bankruptcyagemc,jdbcType=INTEGER},
       bankruptcyAgeF = #{bankruptcyagef,jdbcType=INTEGER},
+      bankruptcyAgeFc = #{bankruptcyagefc,jdbcType=INTEGER},
       illnessAgeM = #{illnessagem,jdbcType=INTEGER},
-      illnessAgeF = #{illnessagef,jdbcType=INTEGER}
+      illnessAgeMc = #{illnessagemc,jdbcType=INTEGER},
+      illnessAgeF = #{illnessagef,jdbcType=INTEGER},
+      illnessAgeFc = #{illnessagefc,jdbcType=INTEGER},
+      industrialAccidentAgeM = #{industrialaccidentagem,jdbcType=INTEGER},
+      industrialAccidentAgeMc = #{industrialaccidentagemc,jdbcType=INTEGER},
+      industrialAccidentAgeF = #{industrialaccidentagef,jdbcType=INTEGER},
+      industrialAccidentAgeFc = #{industrialaccidentagefc,jdbcType=INTEGER}
     where rpId = #{rpid,jdbcType=INTEGER}
   </update>
 </mapper>

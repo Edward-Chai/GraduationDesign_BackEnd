@@ -40,4 +40,13 @@ public class Job {
     public void setSpecificity(String specificity) {
         this.specificity = specificity == null ? null : specificity.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "jobid=" + jobid +
+                ", jobname='" + jobname + '\'' +
+                ", specificity='" + specificity + '\'' +
+                '}';
+    }
 }

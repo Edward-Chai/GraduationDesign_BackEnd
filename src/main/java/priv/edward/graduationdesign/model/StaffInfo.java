@@ -2,7 +2,8 @@ package priv.edward.graduationdesign.model;
 
 import java.util.Date;
 
-public class Staff {
+public class StaffInfo {
+
     private Integer staffid;
 
     private String staffname;
@@ -21,7 +22,16 @@ public class Staff {
 
     private String imagepath;
 
-    public Staff(Integer staffid, String staffname, String staffgender, Float salary, Integer jobid, Date birthday, Date employmentdate, Integer ssid, String imagepath) {
+    private String jobname;
+
+    private String specificity;
+
+    private String ssname;
+
+    public StaffInfo() {
+    }
+
+    public StaffInfo(Integer staffid, String staffname, String staffgender, Float salary, Integer jobid, Date birthday, Date employmentdate, Integer ssid, String imagepath, String jobname, String specificity, String ssname) {
         this.staffid = staffid;
         this.staffname = staffname;
         this.staffgender = staffgender;
@@ -31,10 +41,9 @@ public class Staff {
         this.employmentdate = employmentdate;
         this.ssid = ssid;
         this.imagepath = imagepath;
-    }
-
-    public Staff() {
-        super();
+        this.jobname = jobname;
+        this.specificity = specificity;
+        this.ssname = ssname;
     }
 
     public Integer getStaffid() {
@@ -50,7 +59,7 @@ public class Staff {
     }
 
     public void setStaffname(String staffname) {
-        this.staffname = staffname == null ? null : staffname.trim();
+        this.staffname = staffname;
     }
 
     public String getStaffgender() {
@@ -58,7 +67,7 @@ public class Staff {
     }
 
     public void setStaffgender(String staffgender) {
-        this.staffgender = staffgender == null ? null : staffgender.trim();
+        this.staffgender = staffgender;
     }
 
     public Float getSalary() {
@@ -106,12 +115,36 @@ public class Staff {
     }
 
     public void setImagepath(String imagepath) {
-        this.imagepath = imagepath == null ? null : imagepath.trim();
+        this.imagepath = imagepath;
+    }
+
+    public String getJobname() {
+        return jobname;
+    }
+
+    public void setJobname(String jobname) {
+        this.jobname = jobname;
+    }
+
+    public String getSpecificity() {
+        return specificity;
+    }
+
+    public void setSpecificity(String specificity) {
+        this.specificity = specificity;
+    }
+
+    public String getSsname() {
+        return ssname;
+    }
+
+    public void setSsname(String ssname) {
+        this.ssname = ssname;
     }
 
     @Override
     public String toString() {
-        return "Staff{" +
+        return "StaffInfo{" +
                 "staffid=" + staffid +
                 ", staffname='" + staffname + '\'' +
                 ", staffgender='" + staffgender + '\'' +
@@ -121,6 +154,9 @@ public class Staff {
                 ", employmentdate=" + employmentdate +
                 ", ssid=" + ssid +
                 ", imagepath='" + imagepath + '\'' +
+                ", jobname='" + jobname + '\'' +
+                ", specificity='" + specificity + '\'' +
+                ", ssname='" + ssname + '\'' +
                 '}';
     }
 }

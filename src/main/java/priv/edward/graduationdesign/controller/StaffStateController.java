@@ -1,6 +1,7 @@
 package priv.edward.graduationdesign.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import priv.edward.graduationdesign.util.Message;
 
 @RestController
 @RequestMapping("/staffState")
+@CrossOrigin(origins = "*")
 public class StaffStateController {
 
     @Autowired

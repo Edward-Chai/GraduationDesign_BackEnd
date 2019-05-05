@@ -143,4 +143,38 @@
       imagePath = #{imagepath,jdbcType=VARCHAR}
     where staffId = #{staffid,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="StaffAndJob" type="priv.edward.graduationdesign.model.Staff">
+    <id column="staffId" property="staffid" />
+    <result column="staffName" property="staffname" />
+    <result column="staffGender" property="staffgender" />
+    <result column="salary" property="salary" />
+    <result column="birthday" property="birthday" />
+    <result column="employmentDate" property="employmentdate" />
+    <result column="ssId" property="ssid" />
+    <result column="imagePath" property="imagepath" />
+    <association property="job" javaType="priv.edward.graduationdesign.model.Job">
+      <id column="jobId" property="jobid"/>
+      <result column="jobName" property="jobname"/>
+      <result column="specificity" property="specificity"/>
+    </association>
+  </resultMap>
+
+  <select id="selectAllStaffInfo" resultType="priv.edward.graduationdesign.model.StaffInfo">
+    select
+    staff.staffId,staff.staffName,staff.staffGender,staff.salary,
+    staff.jobId,staff.birthday,staff.employmentDate,staff.ssId,staff.imagePath,
+    job.jobId,job.jobName,job.specificity,
+    staffstate.ssId,staffstate.ssName
+    from ( staff left join staffstate on staff.ssId = staffstate.ssId ) left join job on staff.jobId = job.jobId
+  </select>
+  <select id="selectSingleStaffInfo" parameterType="java.lang.Integer" resultType="priv.edward.graduationdesign.model.StaffInfo">
+    select
+    staff.staffId,staff.staffName,staff.staffGender,staff.salary,
+    staff.jobId,staff.birthday,staff.employmentDate,staff.ssId,staff.imagePath,
+    job.jobId,job.jobName,job.specificity,
+    staffstate.ssId,staffstate.ssName
+    from ( staff left join staffstate on staff.ssId = staffstate.ssId ) left join job on staff.jobId = job.jobId
+    where staff.staffId = #{staffid,jdbcType=INTEGER}
+  </select>
 </mapper>

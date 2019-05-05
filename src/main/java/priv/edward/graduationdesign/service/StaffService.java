@@ -16,4 +16,8 @@ public interface StaffService {
     Message queryOneStaff(int key);
 
     Message queryAllStaff();
+
+    Message querySingleStaffInfo(int key);
+
+    Message queryAllStaffWithJobInfo();
 }

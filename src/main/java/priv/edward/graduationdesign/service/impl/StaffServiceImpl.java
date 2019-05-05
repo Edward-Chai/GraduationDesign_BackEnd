@@ -2,14 +2,17 @@ package priv.edward.graduationdesign.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import priv.edward.graduationdesign.dao.StaffMapper;
 import priv.edward.graduationdesign.model.Staff;
+import priv.edward.graduationdesign.model.StaffInfo;
 import priv.edward.graduationdesign.service.StaffService;
 import priv.edward.graduationdesign.util.Message;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class StaffServiceImpl implements StaffService {
 
     @Autowired
@@ -60,6 +63,26 @@ public class StaffServiceImpl implements StaffService {
         List<Staff> staffList = staffMapper.selectAll();
         if (staffList.size() != 0){
             return Message.success().add("staffList",staffList);
+        }else {
+            return Message.fail();
+        }
+    }
+
+    @Override
+    public Message queryAllStaffWithJobInfo() {
+        List<StaffInfo> staffInfoList = staffMapper.selectAllStaffInfo();
+        if (staffInfoList.size() != 0){
+            return Message.success().add("staffInfoList", staffInfoList);
+        }else {
+            return Message.fail();
+        }
+    }
+
+    @Override
+    public Message querySingleStaffInfo(int key) {
+        StaffInfo staffInfo = staffMapper.selectSingleStaffInfo(key);
+        if (staffInfo.getStaffid()!=0){
+            return Message.success().add("staffInfo",staffInfo);
         }else {
             return Message.fail();
         }
