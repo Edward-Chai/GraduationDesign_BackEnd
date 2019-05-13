@@ -13,6 +13,8 @@ public interface StaffService {
 
     Message editStaff(Staff staff);
 
+    Message queryAllStaffRetired();
+
     Message queryOneStaff(int key);
 
     Message queryAllStaff();
@@ -20,4 +22,6 @@ public interface StaffService {
     Message querySingleStaffInfo(int key);
 
     Message queryAllStaffWithJobInfo();
+
+    Message queryAllStaffInfoRetired();
 }

@@ -40,6 +40,12 @@ public class StaffController {
         return staffService.editStaff(staff);
     }
 
+    @RequestMapping("/queryAllRetired")
+    @ResponseBody
+    public Message queryAllStaffRetired(){
+        return staffService.queryAllStaffRetired();
+    }
+
     @RequestMapping("/queryOne")
     @ResponseBody
     public Message queryOneStaff(int staffid){
@@ -63,6 +69,13 @@ public class StaffController {
     public Message querySingleStaffInfo(int staffid) {
         return staffService.querySingleStaffInfo(staffid);
     }
+
+    @RequestMapping("queryAllRetiredWithInfo")
+    @ResponseBody
+    public Message queryAllStaffInfoRetired(){
+        return staffService.queryAllStaffInfoRetired();
+    }
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {

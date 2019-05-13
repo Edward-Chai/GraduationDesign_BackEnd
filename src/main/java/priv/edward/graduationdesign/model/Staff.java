@@ -19,9 +19,9 @@ public class Staff {
 
     private Integer ssid;
 
-    private String imagepath;
+    private String cadre;
 
-    public Staff(Integer staffid, String staffname, String staffgender, Float salary, Integer jobid, Date birthday, Date employmentdate, Integer ssid, String imagepath) {
+    public Staff(Integer staffid, String staffname, String staffgender, Float salary, Integer jobid, Date birthday, Date employmentdate, Integer ssid, String cadre) {
         this.staffid = staffid;
         this.staffname = staffname;
         this.staffgender = staffgender;
@@ -30,7 +30,7 @@ public class Staff {
         this.birthday = birthday;
         this.employmentdate = employmentdate;
         this.ssid = ssid;
-        this.imagepath = imagepath;
+        this.cadre = cadre;
     }
 
     public Staff() {
@@ -101,26 +101,11 @@ public class Staff {
         this.ssid = ssid;
     }
 
-    public String getImagepath() {
-        return imagepath;
+    public String getCadre() {
+        return cadre;
     }
 
-    public void setImagepath(String imagepath) {
-        this.imagepath = imagepath == null ? null : imagepath.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "Staff{" +
-                "staffid=" + staffid +
-                ", staffname='" + staffname + '\'' +
-                ", staffgender='" + staffgender + '\'' +
-                ", salary=" + salary +
-                ", jobid=" + jobid +
-                ", birthday=" + birthday +
-                ", employmentdate=" + employmentdate +
-                ", ssid=" + ssid +
-                ", imagepath='" + imagepath + '\'' +
-                '}';
+    public void setCadre(String cadre) {
+        this.cadre = cadre == null ? null : cadre.trim();
     }
 }

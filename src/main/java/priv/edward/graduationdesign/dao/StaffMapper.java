@@ -7,8 +7,8 @@ import priv.edward.graduationdesign.model.StaffInfo;
 
 import java.util.List;
 
-@Repository
 @Mapper
+@Repository
 public interface StaffMapper {
     int deleteByPrimaryKey(Integer staffid);
 
@@ -18,13 +18,20 @@ public interface StaffMapper {
 
     Staff selectByPrimaryKey(Integer staffid);
 
-    List<Staff> selectAll();
-
-    List<StaffInfo> selectAllStaffInfo();
-
-    StaffInfo selectSingleStaffInfo(Integer staffid);
-
     int updateByPrimaryKeySelective(Staff record);
 
     int updateByPrimaryKey(Staff record);
+
+    List<Staff> selectAll();
+
+    List<StaffInfo> selectAllStaffInfoRetired();
+
+    List<Staff> selectAllRetired();
+
+    List<StaffInfo> selectAllStaffInfo();
+
+    List<Staff> selectByPrimaryKeyList();
+
+    StaffInfo selectSingleStaffInfo(Integer staffid);
+
 }

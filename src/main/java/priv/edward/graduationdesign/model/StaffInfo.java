@@ -20,7 +20,7 @@ public class StaffInfo {
 
     private Integer ssid;
 
-    private String imagepath;
+    private String cadre;
 
     private String jobname;
 
@@ -31,7 +31,7 @@ public class StaffInfo {
     public StaffInfo() {
     }
 
-    public StaffInfo(Integer staffid, String staffname, String staffgender, Float salary, Integer jobid, Date birthday, Date employmentdate, Integer ssid, String imagepath, String jobname, String specificity, String ssname) {
+    public StaffInfo(Integer staffid, String staffname, String staffgender, Float salary, Integer jobid, Date birthday, Date employmentdate, Integer ssid, String cadre, String jobname, String specificity, String ssname) {
         this.staffid = staffid;
         this.staffname = staffname;
         this.staffgender = staffgender;
@@ -40,7 +40,7 @@ public class StaffInfo {
         this.birthday = birthday;
         this.employmentdate = employmentdate;
         this.ssid = ssid;
-        this.imagepath = imagepath;
+        this.cadre = cadre;
         this.jobname = jobname;
         this.specificity = specificity;
         this.ssname = ssname;
@@ -110,12 +110,12 @@ public class StaffInfo {
         this.ssid = ssid;
     }
 
-    public String getImagepath() {
-        return imagepath;
+    public String getCadre() {
+        return cadre;
     }
 
-    public void setImagepath(String imagepath) {
-        this.imagepath = imagepath;
+    public void setCadre(String cadre) {
+        this.cadre = cadre;
     }
 
     public String getJobname() {
@@ -153,7 +153,7 @@ public class StaffInfo {
                 ", birthday=" + birthday +
                 ", employmentdate=" + employmentdate +
                 ", ssid=" + ssid +
-                ", imagepath='" + imagepath + '\'' +
+                ", cadre='" + cadre + '\'' +
                 ", jobname='" + jobname + '\'' +
                 ", specificity='" + specificity + '\'' +
                 ", ssname='" + ssname + '\'' +

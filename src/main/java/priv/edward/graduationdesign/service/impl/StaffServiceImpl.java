@@ -87,4 +87,24 @@ public class StaffServiceImpl implements StaffService {
             return Message.fail();
         }
     }
+
+    @Override
+    public Message queryAllStaffRetired() {
+        List<Staff> staffList = staffMapper.selectAllRetired();
+        if (staffList.size() != 0){
+            return Message.success().add("staffList", staffList);
+        }else {
+            return Message.fail();
+        }
+    }
+
+    @Override
+    public Message queryAllStaffInfoRetired() {
+        List<StaffInfo> staffInfoList = staffMapper.selectAllStaffInfoRetired();
+        if (staffInfoList.size()!=0){
+            return Message.success().add("staffInfoList",staffInfoList);
+        }else {
+            return Message.fail();
+        }
+    }
 }

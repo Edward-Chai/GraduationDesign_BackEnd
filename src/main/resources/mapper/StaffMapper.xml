@@ -11,20 +11,17 @@
       <arg column="birthday" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="employmentDate" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="ssId" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="imagePath" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cadre" javaType="java.lang.String" jdbcType="CHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    staffId, staffName, staffGender, salary, jobId, birthday, employmentDate, ssId, imagePath
+    staffId, staffName, staffGender, salary, jobId, birthday, employmentDate, ssId, cadre
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from staff
     where staffId = #{staffid,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select * from staff
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff
@@ -33,11 +30,11 @@
   <insert id="insert" parameterType="priv.edward.graduationdesign.model.Staff">
     insert into staff (staffId, staffName, staffGender, 
       salary, jobId, birthday, 
-      employmentDate, ssId, imagePath
+      employmentDate, ssId, cadre
       )
     values (#{staffid,jdbcType=INTEGER}, #{staffname,jdbcType=VARCHAR}, #{staffgender,jdbcType=CHAR}, 
       #{salary,jdbcType=REAL}, #{jobid,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, 
-      #{employmentdate,jdbcType=DATE}, #{ssid,jdbcType=INTEGER}, #{imagepath,jdbcType=VARCHAR}
+      #{employmentdate,jdbcType=DATE}, #{ssid,jdbcType=INTEGER}, #{cadre,jdbcType=CHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="priv.edward.graduationdesign.model.Staff">
@@ -67,8 +64,8 @@
       <if test="ssid != null">
         ssId,
       </if>
-      <if test="imagepath != null">
-        imagePath,
+      <if test="cadre != null">
+        cadre,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -96,8 +93,8 @@
       <if test="ssid != null">
         #{ssid,jdbcType=INTEGER},
       </if>
-      <if test="imagepath != null">
-        #{imagepath,jdbcType=VARCHAR},
+      <if test="cadre != null">
+        #{cadre,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -125,8 +122,8 @@
       <if test="ssid != null">
         ssId = #{ssid,jdbcType=INTEGER},
       </if>
-      <if test="imagepath != null">
-        imagePath = #{imagepath,jdbcType=VARCHAR},
+      <if test="cadre != null">
+        cadre = #{cadre,jdbcType=CHAR},
       </if>
     </set>
     where staffId = #{staffid,jdbcType=INTEGER}
@@ -140,41 +137,62 @@
       birthday = #{birthday,jdbcType=DATE},
       employmentDate = #{employmentdate,jdbcType=DATE},
       ssId = #{ssid,jdbcType=INTEGER},
-      imagePath = #{imagepath,jdbcType=VARCHAR}
+      cadre = #{cadre,jdbcType=CHAR}
     where staffId = #{staffid,jdbcType=INTEGER}
   </update>
 
-  <resultMap id="StaffAndJob" type="priv.edward.graduationdesign.model.Staff">
-    <id column="staffId" property="staffid" />
-    <result column="staffName" property="staffname" />
-    <result column="staffGender" property="staffgender" />
-    <result column="salary" property="salary" />
-    <result column="birthday" property="birthday" />
-    <result column="employmentDate" property="employmentdate" />
-    <result column="ssId" property="ssid" />
-    <result column="imagePath" property="imagepath" />
-    <association property="job" javaType="priv.edward.graduationdesign.model.Job">
-      <id column="jobId" property="jobid"/>
-      <result column="jobName" property="jobname"/>
-      <result column="specificity" property="specificity"/>
-    </association>
-  </resultMap>
+<!--  <resultMap id="StaffAndJob" type="priv.edward.graduationdesign.model.Staff">-->
+<!--    <id column="staffId" property="staffid" />-->
+<!--    <result column="staffName" property="staffname" />-->
+<!--    <result column="staffGender" property="staffgender" />-->
+<!--    <result column="salary" property="salary" />-->
+<!--    <result column="birthday" property="birthday" />-->
+<!--    <result column="employmentDate" property="employmentdate" />-->
+<!--    <result column="ssId" property="ssid" />-->
+<!--    <result column="imagePath" property="imagepath" />-->
+<!--    <association javaType="priv.edward.graduationdesign.model.Job" property="job">-->
+<!--      <id column="jobId" property="jobid" />-->
+<!--      <result column="jobName" property="jobname" />-->
+<!--      <result column="specificity" property="specificity" />-->
+<!--    </association>-->
+<!--  </resultMap>-->
 
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from staff
+  </select>
+  <select id="selectAllRetired" resultMap="BaseResultMap">
+    select * from staff where ssId != 1
+  </select>
   <select id="selectAllStaffInfo" resultType="priv.edward.graduationdesign.model.StaffInfo">
     select
     staff.staffId,staff.staffName,staff.staffGender,staff.salary,
-    staff.jobId,staff.birthday,staff.employmentDate,staff.ssId,staff.imagePath,
+    staff.jobId,staff.birthday,staff.employmentDate,staff.ssId,staff.cadre,
     job.jobId,job.jobName,job.specificity,
     staffstate.ssId,staffstate.ssName
     from ( staff left join staffstate on staff.ssId = staffstate.ssId ) left join job on staff.jobId = job.jobId
   </select>
+  <select id="selectAllStaffInfoRetired" resultType="priv.edward.graduationdesign.model.StaffInfo">
+    select
+    staff.staffId,staff.staffName,staff.staffGender,staff.salary,
+    staff.jobId,staff.birthday,staff.employmentDate,staff.ssId,staff.cadre,
+    job.jobId,job.jobName,job.specificity,
+    staffstate.ssId,staffstate.ssName
+    from ( staff left join staffstate on staff.ssId = staffstate.ssId ) left join job on staff.jobId = job.jobId
+    where staff.ssId != 1
+  </select>
   <select id="selectSingleStaffInfo" parameterType="java.lang.Integer" resultType="priv.edward.graduationdesign.model.StaffInfo">
     select
     staff.staffId,staff.staffName,staff.staffGender,staff.salary,
-    staff.jobId,staff.birthday,staff.employmentDate,staff.ssId,staff.imagePath,
+    staff.jobId,staff.birthday,staff.employmentDate,staff.ssId,staff.cadre,
     job.jobId,job.jobName,job.specificity,
     staffstate.ssId,staffstate.ssName
     from ( staff left join staffstate on staff.ssId = staffstate.ssId ) left join job on staff.jobId = job.jobId
     where staff.staffId = #{staffid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeyList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from staff
+    where staffId = #{staffid,jdbcType=INTEGER}
   </select>
 </mapper>
